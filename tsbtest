@@ -1,4 +1,4 @@
--- SNIPPET 1: FULL WindUI Setup with All Initialization
+-- SNIPPET 1: FULL WindUI Setup with CRIMSON MIDNIGHT GRADIENT THEME
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
@@ -8,26 +8,72 @@ local LocalPlayer = Players.LocalPlayer
 local Camera = workspace.CurrentCamera
 local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
 
+-- CRIMSON MIDNIGHT GRADIENT THEME
 WindUI:AddTheme({
-    Name = "CrimsonMidnight",
-    Accent = Color3.fromHex("#6E0F12"),
-    Dialog = Color3.fromHex("#05060A"),
-    Outline = Color3.fromHex("#2B0F12"),
-    Text = Color3.fromHex("#E6EEF8"),
-    Placeholder = Color3.fromHex("#5A1B20"),
-    Background = Color3.fromHex("#04152B"),
-    Button = Color3.fromHex("#2D0C12"),
-    Icon = Color3.fromHex("#9FBDF8"),
-    Hover = Color3.fromHex("#8C1620"),
-    Active = Color3.fromHex("#4A0A0D"),
-    ScrollBar = Color3.fromHex("#0A1220"),
-    Border = Color3.fromHex("#231014"),
-    Glow = Color3.fromHex("#A33A48"),
-    Shadow = Color3.fromHex("#000000"),
+    Name = "CrimsonMidnight_Gradient",
+    Accent = WindUI:Gradient({
+        ["0"]   = { Color = Color3.fromHex("#6E0F12"), Transparency = 0 },
+        ["50"]  = { Color = Color3.fromHex("#4A0C2E"), Transparency = 0 },
+        ["100"] = { Color = Color3.fromHex("#04152B"), Transparency = 0 },
+    }, { Rotation = 90 }),
+    Dialog = WindUI:Gradient({
+        ["0"]   = { Color = Color3.fromHex("#05060A"), Transparency = 0 },
+        ["100"] = { Color = Color3.fromHex("#0E0A0C"), Transparency = 0 },
+    }, { Rotation = 0 }),
+    Outline = WindUI:Gradient({
+        ["0"]   = { Color = Color3.fromHex("#2B0F12"), Transparency = 0 },
+        ["100"] = { Color = Color3.fromHex("#231014"), Transparency = 0 },
+    }, { Rotation = 90 }),
+    Text = WindUI:Gradient({
+        ["0"]   = { Color = Color3.fromHex("#E6EEF8"), Transparency = 0 },
+        ["100"] = { Color = Color3.fromHex("#C7D6F8"), Transparency = 0 },
+    }, { Rotation = 0 }),
+    Placeholder = WindUI:Gradient({
+        ["0"]   = { Color = Color3.fromHex("#5A1B20"), Transparency = 0 },
+        ["100"] = { Color = Color3.fromHex("#8C1620"), Transparency = 0 },
+    }, { Rotation = 90 }),
+    Background = WindUI:Gradient({
+        ["0"]   = { Color = Color3.fromHex("#04152B"), Transparency = 0 },
+        ["50"]  = { Color = Color3.fromHex("#05060A"), Transparency = 0 },
+        ["100"] = { Color = Color3.fromHex("#000409"), Transparency = 0 },
+    }, { Rotation = 45 }),
+    Button = WindUI:Gradient({
+        ["0"]   = { Color = Color3.fromHex("#2D0C12"), Transparency = 0 },
+        ["100"] = { Color = Color3.fromHex("#6E0F12"), Transparency = 0 },
+    }, { Rotation = 90 }),
+    Icon = WindUI:Gradient({
+        ["0"]   = { Color = Color3.fromHex("#9FBDF8"), Transparency = 0 },
+        ["100"] = { Color = Color3.fromHex("#C7D6F8"), Transparency = 0 },
+    }, { Rotation = 0 }),
+    Hover = WindUI:Gradient({
+        ["0"]   = { Color = Color3.fromHex("#8C1620"), Transparency = 0 },
+        ["100"] = { Color = Color3.fromHex("#B33A3F"), Transparency = 0 },
+    }, { Rotation = 90 }),
+    Active = WindUI:Gradient({
+        ["0"]   = { Color = Color3.fromHex("#4A0A0D"), Transparency = 0 },
+        ["100"] = { Color = Color3.fromHex("#0A0B0E"), Transparency = 0 },
+    }, { Rotation = 90 }),
+    ScrollBar = WindUI:Gradient({
+        ["0"]   = { Color = Color3.fromHex("#0A1220"), Transparency = 0 },
+        ["100"] = { Color = Color3.fromHex("#04121B"), Transparency = 0 },
+    }, { Rotation = 0 }),
+    Border = WindUI:Gradient({
+        ["0"]   = { Color = Color3.fromHex("#231014"), Transparency = 0 },
+        ["100"] = { Color = Color3.fromHex("#2B1A22"), Transparency = 0 },
+    }, { Rotation = 90 }),
+    Glow = WindUI:Gradient({
+        ["0"]   = { Color = Color3.fromHex("#A33A48"), Transparency = 0 },
+        ["50"]  = { Color = Color3.fromHex("#7A3A63"), Transparency = 0 },
+        ["100"] = { Color = Color3.fromHex("#5A1B4F"), Transparency = 0 },
+    }, { Rotation = 45 }),
+    Shadow = WindUI:Gradient({
+        ["0"]   = { Color = Color3.fromHex("#000000"), Transparency = 0 },
+        ["100"] = { Color = Color3.fromHex("#030412"), Transparency = 0 },
+    }, { Rotation = 0 }),
 })
 
 WindUI:SetFont("rbxasset://fonts/families/Nunito.json")
-WindUI:SetTheme("CrimsonMidnight")
+WindUI:SetTheme("CrimsonMidnight_Gradient")
 
 local Window = WindUI:CreateWindow({
     Title = "Strongest Battlegrounds",
@@ -35,7 +81,7 @@ local Window = WindUI:CreateWindow({
     Author = "CPS Network",
     Folder = "CPS_Config",
     Size = UDim2.fromOffset(590, 500),
-    Theme = "CrimsonMidnight",
+    Theme = "CrimsonMidnight_Gradient",
     Transparent = true,
     HidePanelBackground = false,
     OpenButton = {
@@ -45,7 +91,7 @@ local Window = WindUI:CreateWindow({
 })
 
 Window:SetIconSize(48)
-Window:Tag({ Title = "By Waspire", Color = Color3.fromHex("#FF6B6B") })
+Window:Tag({ Title = "v1.2", Color = Color3.fromHex("#FF6B6B") })
 
 Window:CreateTopbarButton("discord", "geist:logo-discord", function()
     if setclipboard then pcall(function() setclipboard("https://discord.gg/cpshub") end) end
@@ -73,7 +119,7 @@ Tabs.Intro:Divider()
 Tabs.Intro:Paragraph({ Title = "<b>Support</b>", Desc = "Discord: discord.gg/cpshub\nYouTube: @waspire", TextSize = 12, Box = true })
 Tabs.Intro:Divider()
 
--- GLOBAL VARIABLES - All Settings
+-- GLOBAL VARIABLES
 local detectActive = true
 local m1AfterEnabled = false
 local m1CatchEnabled = false
@@ -98,10 +144,10 @@ task.delay(1, function()
     })
 end)
 
-print("✅ CPS Network - Initialized")
+print("✅ CPS Network - Initialized with Crimson Midnight Theme")
 
 -- SNIPPET 1 COMPLETE
--- SNIPPET 2: COMBAT SETTINGS + FULL CAMLOCK (PC + MOBILE) + CAMLOCK GUI
+-- SNIPPET 2: COMBAT SETTINGS + DRAGGABLE CAMLOCK GUI + PC/MOBILE CAMLOCK
 -- Combat Sliders and Toggles
 Tabs.Combat:Toggle({ Title = "Auto Block", Value = true, Callback = function(v) detectActive = v end })
 Tabs.Combat:Toggle({ Title = "M1 After Block", Value = false, Callback = function(v) m1AfterEnabled = v end })
@@ -146,10 +192,9 @@ local function getPlayerInView()
     return closest
 end
 
--- PC CAMLOCK Variables
+-- PC CAMLOCK
 local camlockTargetPC, camlockHighlightPC, camlockBillboardPC = nil, nil, nil
 
--- Lock PC Camlock
 local function lockCamlockPC()
     if not camlockEnabledPC or not camlockTargetPC or not camlockTargetPC.Character then return end
     local char = camlockTargetPC.Character
@@ -187,7 +232,6 @@ local function lockCamlockPC()
     end)
 end
 
--- Clear PC Camlock
 local function clearCamlockPC()
     RunService:UnbindFromRenderStep("PC_CamlockLook")
     if camlockBillboardPC then pcall(function() camlockBillboardPC:Destroy() end) camlockBillboardPC = nil end
@@ -195,7 +239,6 @@ local function clearCamlockPC()
     camlockTargetPC = nil
 end
 
--- PC Camlock Keybind
 UserInputService.InputBegan:Connect(function(input, gp)
     if gp then return end
     if input.UserInputType == Enum.UserInputType.Keyboard and input.KeyCode == camlockKey then
@@ -213,7 +256,7 @@ Players.PlayerRemoving:Connect(function(plr)
     if camlockTargetPC == plr then clearCamlockPC() end
 end)
 
--- CAMLOCK GUI - Rectangle with Gradient
+-- DRAGGABLE CAMLOCK GUI
 local camlockGui = Instance.new("ScreenGui", PlayerGui)
 camlockGui.Name = "CamlockGui"
 camlockGui.ResetOnSpawn = false
@@ -272,16 +315,43 @@ closeBtn.MouseButton1Click:Connect(function()
     camlockGui:Destroy()
 end)
 
--- MOBILE CAMLOCK Variables
+-- DRAGGING VARIABLES
+local dragging = false
+local dragStart = nil
+local startPos = nil
+
+frame.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        dragging = true
+        dragStart = input.Position
+        startPos = frame.Position
+    end
+end)
+
+UserInputService.InputChanged:Connect(function(input)
+    if dragging and dragStart and startPos then
+        local delta = input.Position - dragStart
+        frame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+    end
+end)
+
+UserInputService.InputEnded:Connect(function(input, gp)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        dragging = false
+        dragStart = nil
+        startPos = nil
+    end
+end)
+
+-- MOBILE CAMLOCK
 local camlockMobileState = false
 local camlockTargetMobile, camlockHighlightMobile, camlockBillboardMobile = nil, nil, nil
 local lastClickTime = 0
 
--- Mobile Camlock Toggle
-frame.InputBegan:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+frame.MouseButton1Click:Connect(function()
+    if not dragging then
         local currentTime = tick()
-        if currentTime - lastClickTime > 0.5 then
+        if currentTime - lastClickTime > 0.3 then
             lastClickTime = currentTime
             camlockMobileState = not camlockMobileState
             
@@ -643,11 +713,11 @@ Tabs.Utils:Button{Title="Refresh", Callback=function() pcall(function() if Local
 Tabs.Utils:Slider{Title="Walk Speed", Value={Min=16, Max=100, Default=16}, Step=1, Callback=function(v) pcall(function() if Character and Character:FindFirstChildOfClass("Humanoid") then Character:FindFirstChildOfClass("Humanoid").WalkSpeed=v end end) end}
 Tabs.Utils:Slider{Title="Jump Power", Value={Min=50, Max=200, Default=50}, Step=1, Callback=function(v) pcall(function() if Character and Character:FindFirstChildOfClass("Humanoid") then Character:FindFirstChildOfClass("Humanoid").JumpPower=v end end) end}
 
-print("✅ CPS Network - All Systems Loaded!")
+print("✅ CPS Network - Strongest Battlegrounds")
+print("✅ Crimson Midnight Theme Applied")
 print("✅ Autoblock: Working")
 print("✅ Auto Counter: Working")
-print("✅ Camlock: Working")
+print("✅ Camlock: Draggable & Working")
 print("✅ ESP: Working")
-print("✅ All Systems Operational")
 
 -- SNIPPET 4 COMPLETE - FULL SCRIPT READY
