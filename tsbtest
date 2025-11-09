@@ -1,11 +1,9 @@
--- SNIPPET 1: WindUI Setup with RED BLUE Theme for Main Window
+-- SNIPPET 1: WindUI Setup with CrimsonMidnight_Gradient Theme
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
-
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local UserInputService = game:GetService("UserInputService")
 local VirtualInputManager = game:GetService("VirtualInputManager")
-
 local LocalPlayer = Players.LocalPlayer
 local Camera = workspace.CurrentCamera
 local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
@@ -16,52 +14,81 @@ local Localization = WindUI:Localization({
     DefaultLanguage = "en",
     Translations = {
         ["en"] = {
-            ["WINDUI_EXAMPLE"] = "WindUI Example",
-            ["WELCOME"] = "Welcome to WindUI!",
-            ["LIB_DESC"] = "Beautiful UI library for Roblox",
-            ["SETTINGS"] = "Settings",
-            ["APPEARANCE"] = "Appearance",
-            ["FEATURES"] = "Features",
-            ["UTILITIES"] = "Utilities",
-            ["UI_ELEMENTS"] = "UI Elements",
-            ["CONFIGURATION"] = "Configuration",
-            ["SAVE_CONFIG"] = "Save Configuration",
-            ["LOAD_CONFIG"] = "Load Configuration",
-            ["THEME_SELECT"] = "Select Theme",
-            ["TRANSPARENCY"] = "Window Transparency",
-            ["LOCKED_TAB"] = "Locked Tab"
+            ["WINDUI_EXAMPLE"] = "WindUI Example", ["WELCOME"] = "Welcome to WindUI!", ["LIB_DESC"] = "Beautiful UI library for Roblox", ["SETTINGS"] = "Settings", ["APPEARANCE"] = "Appearance", ["FEATURES"] = "Features", ["UTILITIES"] = "Utilities", ["UI_ELEMENTS"] = "UI Elements", ["CONFIGURATION"] = "Configuration", ["SAVE_CONFIG"] = "Save Configuration", ["LOAD_CONFIG"] = "Load Configuration", ["THEME_SELECT"] = "Select Theme", ["TRANSPARENCY"] = "Window Transparency", ["LOCKED_TAB"] = "Locked Tab"
         }
     }
 })
 
 WindUI:AddTheme({
-    Name = "CrimsonBlue",
+    Name = "CrimsonMidnight_Gradient",
     Accent = WindUI:Gradient({
-        ["0"]   = { Color = Color3.new(1, 0, 0), Transparency = 0 },
-        ["100"] = { Color = Color3.new(0, 0, 1), Transparency = 0 },
-    }, {Rotation = 90}),
-    Dialog = Color3.fromRGB(20, 20, 30),
-    Outline = Color3.new(1, 0, 0),
-    Text = Color3.fromRGB(255, 100, 100),
-    Placeholder = Color3.fromRGB(100, 50, 50),
-    Background = Color3.fromRGB(10, 10, 20),
-    Button = Color3.fromRGB(50, 20, 20),
-    Icon = Color3.fromRGB(100, 50, 50),
-    Hover = Color3.fromRGB(150, 50, 50),
-    Active = Color3.new(1, 0, 0),
-    ScrollBar = Color3.fromRGB(30, 15, 15),
-    Border = Color3.new(1, 0, 0),
-    Glow = Color3.new(1, 0, 0),
-    Shadow = Color3.new(0, 0, 0),
+        ["0"]   = { Color = Color3.fromHex("#6E0F12"), Transparency = 0 },
+        ["50"]  = { Color = Color3.fromHex("#4A0C2E"), Transparency = 0 },
+        ["100"] = { Color = Color3.fromHex("#04152B"), Transparency = 0 },
+    }, { Rotation = 90 }),
+    Dialog = WindUI:Gradient({
+        ["0"]   = { Color = Color3.fromHex("#05060A"), Transparency = 0 },
+        ["100"] = { Color = Color3.fromHex("#0E0A0C"), Transparency = 0 },
+    }, { Rotation = 0 }),
+    Outline = WindUI:Gradient({
+        ["0"]   = { Color = Color3.fromHex("#2B0F12"), Transparency = 0 },
+        ["100"] = { Color = Color3.fromHex("#231014"), Transparency = 0 },
+    }, { Rotation = 90 }),
+    Text = WindUI:Gradient({
+        ["0"]   = { Color = Color3.fromHex("#E6EEF8"), Transparency = 0 },
+        ["100"] = { Color = Color3.fromHex("#C7D6F8"), Transparency = 0 },
+    }, { Rotation = 0 }),
+    Placeholder = WindUI:Gradient({
+        ["0"]   = { Color = Color3.fromHex("#5A1B20"), Transparency = 0 },
+        ["100"] = { Color = Color3.fromHex("#8C1620"), Transparency = 0 },
+    }, { Rotation = 90 }),
+    Background = WindUI:Gradient({
+        ["0"]   = { Color = Color3.fromHex("#04152B"), Transparency = 0 },
+        ["50"]  = { Color = Color3.fromHex("#05060A"), Transparency = 0 },
+        ["100"] = { Color = Color3.fromHex("#000409"), Transparency = 0 },
+    }, { Rotation = 45 }),
+    Button = WindUI:Gradient({
+        ["0"]   = { Color = Color3.fromHex("#2D0C12"), Transparency = 0 },
+        ["100"] = { Color = Color3.fromHex("#6E0F12"), Transparency = 0 },
+    }, { Rotation = 90 }),
+    Icon = WindUI:Gradient({
+        ["0"]   = { Color = Color3.fromHex("#9FBDF8"), Transparency = 0 },
+        ["100"] = { Color = Color3.fromHex("#C7D6F8"), Transparency = 0 },
+    }, { Rotation = 0 }),
+    Hover = WindUI:Gradient({
+        ["0"]   = { Color = Color3.fromHex("#8C1620"), Transparency = 0 },
+        ["100"] = { Color = Color3.fromHex("#B33A3F"), Transparency = 0 },
+    }, { Rotation = 90 }),
+    Active = WindUI:Gradient({
+        ["0"]   = { Color = Color3.fromHex("#4A0A0D"), Transparency = 0 },
+        ["100"] = { Color = Color3.fromHex("#0A0B0E"), Transparency = 0 },
+    }, { Rotation = 90 }),
+    ScrollBar = WindUI:Gradient({
+        ["0"]   = { Color = Color3.fromHex("#0A1220"), Transparency = 0 },
+        ["100"] = { Color = Color3.fromHex("#04121B"), Transparency = 0 },
+    }, { Rotation = 0 }),
+    Border = WindUI:Gradient({
+        ["0"]   = { Color = Color3.fromHex("#231014"), Transparency = 0 },
+        ["100"] = { Color = Color3.fromHex("#2B1A22"), Transparency = 0 },
+    }, { Rotation = 90 }),
+    Glow = WindUI:Gradient({
+        ["0"]   = { Color = Color3.fromHex("#A33A48"), Transparency = 0 },
+        ["50"]  = { Color = Color3.fromHex("#7A3A63"), Transparency = 0 },
+        ["100"] = { Color = Color3.fromHex("#5A1B4F"), Transparency = 0 },
+    }, { Rotation = 45 }),
+    Shadow = WindUI:Gradient({
+        ["0"]   = { Color = Color3.fromHex("#000000"), Transparency = 0 },
+        ["100"] = { Color = Color3.fromHex("#030412"), Transparency = 0 },
+    }, { Rotation = 0 }),
 })
 
 WindUI:SetFont("rbxasset://fonts/families/Nunito.json")
-WindUI:SetTheme("CrimsonBlue")
+WindUI:SetTheme("CrimsonMidnight_Gradient")
 
 local function gradient(text, startColor, endColor)
     local result = ""
     for i = 1, #text do
-        local t = (i - 1) / math.max(#text - 1, 1)
+        local t = (i - 1) / (#text - 1)
         local r = math.floor((startColor.R + (endColor.R - startColor.R) * t) * 255)
         local g = math.floor((startColor.G + (endColor.G - startColor.G) * t) * 255)
         local b = math.floor((startColor.B + (endColor.B - startColor.B) * t) * 255)
@@ -71,44 +98,31 @@ local function gradient(text, startColor, endColor)
 end
 
 WindUI:Popup({
-    Title = gradient("Welcome To CPS Network!", Color3.new(1, 0, 0), Color3.new(0, 0, 1)),
-    Icon = "rbxassetid://115220176602432",
-    Content = "Please join the discord server!",
-    Theme = "CrimsonBlue",
-    Buttons = {
-        {
-            Title = "Enjoy!",
-            Icon = "lucide:heart",
-            Variant = "Primary",
-            Callback = function() end
-        }
-    }
+    Title = gradient("Welcome To CPS Network!", Color3.fromHex("#530303"), Color3.fromHex("#04027c")),
+    Icon = "rbxassetid://93732476839185",
+    Content = "Please join the discord server !",
+    Theme = "CrimsonMidnight_Gradient",
+    Buttons = { { Title = "Enjoy!", Icon = "lucide:heart", Variant = "Primary", Callback = function() end } }
 })
 
 local Window = WindUI:CreateWindow({
     Title = "Strongest Battlegrounds",
-    Icon = "rbxassetid://115220176602432",
+    Icon = "rbxassetid://93732476839185",
     Author = "CPS Network",
-    Folder = "CPS_Network_Config",
+    Folder = "WindUI_Example",
     Size = UDim2.fromOffset(590, 500),
-    Theme = "CrimsonBlue",
+    Theme = "CrimsonMidnight_Gradient",
     Transparent = true,
     BackgroundImageTransparency = 0.25,
     HidePanelBackground = false,
     NewElements = false,
-    Background = "rbxassetid://126127539858360",
-    User = {
-        Enabled = true,
-        Anonymous = false,
-        Callback = function()
-            WindUI:Notify({Title = "User Profile", Content = "User profile clicked!", Duration = 3 })
-        end
-    },
+    Background = "rbxassetid://120655420966329",
+    User = { Enabled = true, Anonymous = true, Callback = function() WindUI:Notify({ Title = "User Profile", Content = "User profile clicked!", Duration = 3 }) end },
     Acrylic = false,
     HideSearchBar = false,
     SideBarWidth = 200,
     OpenButton = {
-        Title = "Open CPS Hub UI",
+        Title = "Open .ftgs hub UI",
         CornerRadius = UDim.new(1,0),
         StrokeThickness = 3,
         Enabled = true,
@@ -117,81 +131,52 @@ local Window = WindUI:CreateWindow({
     },
 })
 
+Window.User:SetAnonymous(false)
 Window:SetIconSize(48)
-Window:Tag({Title = "By Waspire", Color = Color3.fromHex("#ff3300")})
+Window:Tag({ Title = "By Waspire", Color = Color3.fromHex("#ff3300") })
 
-Window:CreateTopbarButton("discord-button", "geist:logo-discord", function()
-    local link = "https://discord.gg/cpshub"
+Window:CreateTopbarButton("theme-switcher", "geist:logo-discord", function()
+    local link = "https://discord.com/invite/J2PK69tFRM"
     if setclipboard then pcall(function() setclipboard(link) end) end
-    WindUI:Notify({
-        Title = "Discord link has been copied!",
-        Content = "Please join our discord!",
-        Icon = "geist:logo-discord",
-        Duration = 3
-    })
+    WindUI:Notify({ Title = "Discord link has been copied!", Content = "Please join our discord!", Icon = "geist:logo-discord", Duration = 3 })
 end, 990)
 
-Window:CreateTopbarButton("youtube-button", "lucide:youtube", function()
-    local link = "https://youtube.com/@waspire"
+Window:CreateTopbarButton("theme-switcherr", "lucide:youtube", function()
+    local link = "https://www.youtube.com/@waspire"
     if setclipboard then pcall(function() setclipboard(link) end) end
-    WindUI:Notify({
-        Title = "Youtube Channel link has been copied!",
-        Content = "Please Subscribe!",
-        Icon = "lucide:youtube",
-        Duration = 3
-    })
+    WindUI:Notify({ Title = "Youtube Channel link has been copied!", Content = "Please Subscribe!", Icon = "lucide:youtube", Duration = 3 })
 end, 990)
 
 Window:Divider()
 
 local Tabs = {
-    Introduction = Window:Tab({
-        Title = "Introduction",
-        Icon = "lucide:house",
-        Opened = true
-    }),
+    Appearance = Window:Tab({ Title = "Introduction", Icon = "lucide:house", Opened = true }),
+    AutoCombat = Window:Tab({ Title = "Auto Combat", Icon = "lucide:sword", Opened = true }),
+    AutoCounter = Window:Tab({ Title = "Auto Counter", Icon = "lucide:shield", Opened = true }),
+    Utilities = Window:Tab({ Title = "Utilities", Icon = "lucide:plus", Opened = true }),
 }
 
-Window:Divider()
-
-Tabs.AutoCombat = Window:Tab({
-    Title = "Auto Combat",
-    Icon = "lucide:sword",
-    Opened = false
-})
-
-Tabs.AutoCounter = Window:Tab({
-    Title = "Auto Counter",
-    Icon = "lucide:shield",
-    Opened = false
-})
-
-Tabs.Utilities = Window:Tab({
-    Title = "Utilities",
-    Icon = "lucide:plus",
-    Opened = false
-})
-
-Tabs.Introduction:Divider()
-Tabs.Introduction:Paragraph({
+Tabs.Appearance:Select()
+Tabs.Appearance:Divider()
+Tabs.Appearance:Paragraph({
     Title = "   <font size=\"20\">═══<u>CPS Network Introduction</u>═══</font>",
     Desc = "",
     TextSize = 21,
     TextTransparency = 0.05,
     Box = false,
 })
-Tabs.Introduction:Divider()
-Tabs.Introduction:Paragraph({
+Tabs.Appearance:Divider()
+Tabs.Appearance:Paragraph({
     Title = "",
     Desc = "",
     Image = "",
     ImageSize = 30,
-    Thumbnail = "rbxassetid://136887189396137",
+    Thumbnail = "rbxassetid://117010285415784",
     ThumbnailSize = 250,
 })
 
--- Snippet 1 Complete: RED BLUE Theme WindUI Main Window
--- SNIPPET 2: Settings + Toggles + Camlock (SMALL CAMLOCK GUI WITH SMOOTH DRAG + CLOSE BUTTON)
+-- SNIPPET 1 COMPLETE: WindUI, CrimsonMidnight theme with all tabs configured
+-- SNIPPET 2: Settings, Toggles, Sliders + Camlock (Small GUI with Keybind Info, Smooth Drag, Close Button)
 local themes = {}
 for themeName, _ in pairs(WindUI:GetThemes()) do
     table.insert(themes, themeName)
@@ -200,7 +185,7 @@ table.sort(themes)
 
 local canchangetheme = true
 
-local transparencySlider = Tabs.Introduction:Slider({
+local transparencySlider = Tabs.Appearance:Slider({
     Title = "loc:TRANSPARENCY",
     Value = {Min=0, Max=1, Default=0},
     Flag = "transparencySlider",
@@ -211,22 +196,22 @@ local transparencySlider = Tabs.Introduction:Slider({
     end
 })
 
-local ThemeToggle = Tabs.Introduction:Toggle({
+local ThemeToggle = Tabs.Appearance:Toggle({
     Title = "Enable Dark Mode",
     Desc = "Use dark color scheme",
     Value = true,
     Callback = function(state)
-        if canchangetheme then WindUI:SetTheme(state and "CrimsonBlue" or "CrimsonBlue") end
+        if canchangetheme then WindUI:SetTheme(state and "CrimsonMidnight_Gradient" or "CrimsonMidnight_Gradient") end
     end
 })
 
 WindUI:OnThemeChange(function(theme)
     canchangetheme = false
-    ThemeToggle:Set(theme == "CrimsonBlue")
+    ThemeToggle:Set(theme == "CrimsonMidnight_Gradient")
     canchangetheme = true
 end)
 
-Tabs.Introduction:Button({
+Tabs.Appearance:Button({
     Title = "Create New Theme",
     Icon = "plus",
     Callback = function()
@@ -366,15 +351,15 @@ Players.PlayerRemoving:Connect(function(plr)
     if camlockTargetPC and plr == camlockTargetPC then clearCamlockPC() end
 end)
 
--- MOBILE CAMLOCK GUI - MUCH SMALLER, RED/BLUE, SMOOTH DRAG, CLOSE BUTTON DELETES GUI
+-- MOBILE CAMLOCK GUI - SMALL, CRIMSON/BLUE, SMOOTH DRAG, CLOSE BUTTON, KEYBIND INFO
 local camlockGui = Instance.new("ScreenGui", PlayerGui)
 camlockGui.Name = "CPSMobileCamlockGui"
 camlockGui.ResetOnSpawn = false
 camlockGui.Enabled = true
 
 local camlockFrame = Instance.new("Frame", camlockGui)
-camlockFrame.Size = UDim2.new(0, 120, 0, 50)
-camlockFrame.Position = UDim2.new(0.5, -60, 0.95, -60)
+camlockFrame.Size = UDim2.new(0, 130, 0, 55)
+camlockFrame.Position = UDim2.new(0.5, -65, 0.95, -70)
 camlockFrame.AnchorPoint = Vector2.new(0.5, 1)
 camlockFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 30)
 camlockFrame.BorderSizePixel = 0
@@ -387,7 +372,7 @@ UIGradient.Rotation = 45
 
 local closeButton = Instance.new("TextButton", camlockFrame)
 closeButton.Size = UDim2.new(0, 16, 0, 16)
-closeButton.Position = UDim2.new(1, -20, 0, 3)
+closeButton.Position = UDim2.new(1, -19, 0, 3)
 closeButton.BackgroundColor3 = Color3.new(1, 0, 0)
 closeButton.BorderSizePixel = 0
 closeButton.Text = "×"
@@ -403,36 +388,52 @@ closeButton.MouseButton1Click:Connect(function()
 end)
 
 local camlockText = Instance.new("TextLabel", camlockFrame)
-camlockText.Size = UDim2.new(1, -8, 0.45, 0)
+camlockText.Size = UDim2.new(1, -8, 0.33, 0)
 camlockText.Position = UDim2.new(0, 4, 0, 2)
 camlockText.BackgroundTransparency = 1
 camlockText.Text = "Camlock: OFF"
 camlockText.TextColor3 = Color3.new(1, 0, 0)
 camlockText.Font = Enum.Font.SourceSansBold
 camlockText.TextScaled = true
+camlockText.TextXAlignment = Enum.TextXAlignment.Left
 
 local fightingText = Instance.new("TextLabel", camlockFrame)
-fightingText.Size = UDim2.new(1, -8, 0.45, 0)
-fightingText.Position = UDim2.new(0, 4, 0, 24)
+fightingText.Size = UDim2.new(1, -8, 0.33, 0)
+fightingText.Position = UDim2.new(0, 4, 0, 17)
 fightingText.BackgroundTransparency = 1
 fightingText.Text = ""
 fightingText.TextColor3 = Color3.new(1, 0, 0)
 fightingText.Font = Enum.Font.SourceSansItalic
 fightingText.TextScaled = true
+fightingText.TextXAlignment = Enum.TextXAlignment.Left
+
+local keybindText = Instance.new("TextLabel", camlockFrame)
+keybindText.Size = UDim2.new(1, -8, 0.28, 0)
+keybindText.Position = UDim2.new(0, 4, 0.65, 0)
+keybindText.BackgroundTransparency = 1
+keybindText.Text = "PC: " .. camlockKey.Name
+keybindText.TextColor3 = Color3.new(0, 0.7, 1)
+keybindText.Font = Enum.Font.SourceSansItalic
+keybindText.TextSize = 9
+keybindText.TextXAlignment = Enum.TextXAlignment.Left
 
 camlockFrame.Active = true
 
 local camlockMobileState, camlockTargetMobile, camlockHighlightMobile, camlockBillboardMobile = false
 local dragging, dragStart, startPos
 local dragVelocity = Vector2.new(0, 0)
-local dragSmoothing = 0.2
+local dragSmoothing = 0.15
 
 UserInputService.InputBegan:Connect(function(input, gp)
     if gp then return end
     if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-        if (input.Position - camlockFrame.AbsolutePosition).Magnitude < math.max(camlockFrame.AbsoluteSize.X, camlockFrame.AbsoluteSize.Y) then
+        local inputPos = input.Position
+        local framePos = camlockFrame.AbsolutePosition
+        local frameSize = camlockFrame.AbsoluteSize
+        if inputPos.X >= framePos.X and inputPos.X <= framePos.X + frameSize.X and
+           inputPos.Y >= framePos.Y and inputPos.Y <= framePos.Y + frameSize.Y then
             dragging = true
-            dragStart = input.Position
+            dragStart = inputPos
             startPos = camlockFrame.Position
             dragVelocity = Vector2.new(0, 0)
         end
@@ -508,6 +509,7 @@ function lockCamlockMobile()
 
     camlockText.Text = "Camlock: ON"
     fightingText.Text = target.DisplayName or target.Name
+    keybindText.Text = "PC: " .. camlockKey.Name
 
     RunService:UnbindFromRenderStep("Mobile_CamlockLook")
     RunService:BindToRenderStep("Mobile_CamlockLook", Enum.RenderPriority.Camera.Value + 5, function()
@@ -536,8 +538,8 @@ Players.PlayerRemoving:Connect(function(plr)
     if camlockTargetMobile and plr.Character == camlockTargetMobile then clearCamlockMobile() end
 end)
 
--- Snippet 2 Complete: Settings, toggles, camlock (small GUI, smooth drag, close deletes)
--- SNIPPET 3: Autoblock & M1 Catch Combat Logic
+-- SNIPPET 2 COMPLETE: Settings, toggles, sliders, PC/Mobile camlock with keybind info, smooth drag, close button
+-- SNIPPET 3: Autoblock and M1 Catch Combat Logic (Fixed with pcall)
 local comboIDs = {10480793962, 10480796021}
 
 local allIDs = {
@@ -709,8 +711,8 @@ RunService.Heartbeat:Connect(function()
     pcall(checkM1Catch)
 end)
 
--- Snippet 3 Complete: Autoblock and M1 Catch working perfectly
--- SNIPPET 4: Auto Counter + ESP + Utilities
+-- SNIPPET 3 COMPLETE: Autoblock with animation detection and M1 Catch - all errors handled
+-- SNIPPET 4: Auto Counter, ESP, and Utilities Tab
 local delayed = {
     ["rbxassetid://10479335397"] = true,
     ["rbxassetid://13380255751"] = true,
@@ -842,26 +844,40 @@ end)
 
 Players.PlayerRemoving:Connect(clearESP)
 
-Tabs.Utilities:Toggle{ Title = "Enable ESP", Value = true, Callback = function(value)
-    ESPEnabled = value
-    if not value then for plr, _ in pairs(espCache) do clearESP(plr) end end
-end }
+Tabs.Utilities:Toggle{
+    Title = "Enable ESP",
+    Value = true,
+    Callback = function(value)
+        ESPEnabled = value
+        if not value then
+            for plr, _ in pairs(espCache) do
+                clearESP(plr)
+            end
+        end
+    end,
+}
 
-Tabs.Utilities:Button{ Title = "Copy Discord", Description = "Copy discord invite to clipboard",
+Tabs.Utilities:Button{
+    Title = "Copy Discord",
+    Description = "Copy discord invite to clipboard",
     Callback = function()
         if setclipboard then pcall(function() setclipboard("https://discord.gg/cpshub") end) end
         WindUI:Notify({Title = "Discord Copied!", Content = "Join our server: discord.gg/cpshub", Duration = 3})
     end,
 }
 
-Tabs.Utilities:Button{ Title = "Copy Youtube", Description = "Copy youtube channel to clipboard",
+Tabs.Utilities:Button{
+    Title = "Copy Youtube",
+    Description = "Copy youtube channel to clipboard",
     Callback = function()
         if setclipboard then pcall(function() setclipboard("https://youtube.com/@waspire") end) end
         WindUI:Notify({Title = "Youtube Copied!", Content = "Subscribe to @waspire", Duration = 3})
     end,
 }
 
-Tabs.Utilities:Button{ Title = "Refresh Character", Description = "Respawn your character",
+Tabs.Utilities:Button{
+    Title = "Refresh Character",
+    Description = "Respawn your character",
     Callback = function()
         if LocalPlayer and LocalPlayer.Character then
             LocalPlayer.Character:BreakJoints()
@@ -871,7 +887,9 @@ Tabs.Utilities:Button{ Title = "Refresh Character", Description = "Respawn your 
     end,
 }
 
-Tabs.Utilities:Button{ Title = "Reset Script", Description = "Cleanup and reset all functions",
+Tabs.Utilities:Button{
+    Title = "Reset Script",
+    Description = "Cleanup and reset all functions",
     Callback = function()
         for plr, _ in pairs(espCache) do clearESP(plr) end
         clearCamlockPC()
@@ -888,7 +906,10 @@ Tabs.Utilities:Button{ Title = "Reset Script", Description = "Cleanup and reset 
     end,
 }
 
-Tabs.Utilities:Slider{ Title = "Walk Speed", Value = {Min=16, Max=100, Default=16}, Step = 1,
+Tabs.Utilities:Slider{
+    Title = "Walk Speed",
+    Value = {Min=16, Max=100, Default=16},
+    Step = 1,
     Callback = function(value)
         if LocalPlayer.Character and LocalPlayer.Character:FindFirstChildOfClass("Humanoid") then
             LocalPlayer.Character:FindFirstChildOfClass("Humanoid").WalkSpeed = tonumber(value) or 16
@@ -896,7 +917,10 @@ Tabs.Utilities:Slider{ Title = "Walk Speed", Value = {Min=16, Max=100, Default=1
     end,
 }
 
-Tabs.Utilities:Slider{ Title = "Jump Power", Value = {Min=50, Max=200, Default=50}, Step = 1,
+Tabs.Utilities:Slider{
+    Title = "Jump Power",
+    Value = {Min=50, Max=200, Default=50},
+    Step = 1,
     Callback = function(value)
         if LocalPlayer.Character and LocalPlayer.Character:FindFirstChildOfClass("Humanoid") then
             LocalPlayer.Character:FindFirstChildOfClass("Humanoid").JumpPower = tonumber(value) or 50
@@ -907,6 +931,7 @@ Tabs.Utilities:Slider{ Title = "Jump Power", Value = {Min=50, Max=200, Default=5
 Window:OnClose(function() print("Window closed") end)
 Window:OnDestroy(function() print("Window destroyed") end)
 Window:OnOpen(function() print("Window opened") end)
+
 Window:UnlockAll()
 
 LocalPlayer.CharacterAdded:Connect(function()
@@ -929,4 +954,4 @@ print("✅ CPS Network Script Loaded Successfully!")
 print("Discord: https://discord.gg/cpshub")
 print("Youtube: https://youtube.com/@waspire")
 
--- Snippet 4 Complete: Full script with Auto Counter, ESP, Utilities all working with red/blue main theme
+-- SNIPPET 4 COMPLETE: Auto Counter working with blocking check, ESP with highlights, Utilities with all sliders/buttons functional
