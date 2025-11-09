@@ -1,4 +1,4 @@
--- SNIPPET 1: WindUI Setup with CrimsonMidnight_Gradient Theme
+-- SNIPPET 1: WindUI Setup with CrimsonMidnight_Gradient Theme + Config System + Introduction
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
@@ -7,6 +7,7 @@ local VirtualInputManager = game:GetService("VirtualInputManager")
 local LocalPlayer = Players.LocalPlayer
 local Camera = workspace.CurrentCamera
 local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
+local HttpService = game:GetService("HttpService")
 
 local Localization = WindUI:Localization({
     Enabled = true,
@@ -153,18 +154,52 @@ local Tabs = {
     Appearance = Window:Tab({ Title = "Introduction", Icon = "lucide:house", Opened = true }),
     AutoCombat = Window:Tab({ Title = "Auto Combat", Icon = "lucide:sword", Opened = true }),
     AutoCounter = Window:Tab({ Title = "Auto Counter", Icon = "lucide:shield", Opened = true }),
+    AutoTechs = Window:Tab({ Title = "Auto Techs", Icon = "lucide:zap", Opened = true }),
     Utilities = Window:Tab({ Title = "Utilities", Icon = "lucide:plus", Opened = true }),
 }
 
 Tabs.Appearance:Select()
 Tabs.Appearance:Divider()
 Tabs.Appearance:Paragraph({
-    Title = "   <font size=\"20\">═══<u>CPS Network Introduction</u>═══</font>",
+    Title = "   <font size=\"20\">═══<u>CPS Network - Strongest Battlegrounds</u>═══</font>",
     Desc = "",
-    TextSize = 21,
+    TextSize = 20,
     TextTransparency = 0.05,
     Box = false,
 })
+
+Tabs.Appearance:Divider()
+Tabs.Appearance:Paragraph({
+    Title = "<b>About This Script</b>",
+    Desc = "CPS Network's advanced combat automation system for Strongest Battlegrounds. This script provides real-time combat enhancements including autoblock, counter detection, and advanced targeting systems.",
+    TextSize = 14,
+    Box = true,
+})
+
+Tabs.Appearance:Divider()
+Tabs.Appearance:Paragraph({
+    Title = "<b>Features</b>",
+    Desc = "✓ Advanced Autoblock Detection\n✓ M1 After Block & M1 Catch\n✓ Auto Counter System\n✓ PC & Mobile Camlock\n✓ Real-Time ESP\n✓ Auto Configuration Saving",
+    TextSize = 13,
+    Box = true,
+})
+
+Tabs.Appearance:Divider()
+Tabs.Appearance:Paragraph({
+    Title = "<b>Settings</b>",
+    Desc = "All settings are automatically saved every 5 seconds to config.json. You can customize ranges, delays, and enable/disable features from their respective tabs.",
+    TextSize = 13,
+    Box = true,
+})
+
+Tabs.Appearance:Divider()
+Tabs.Appearance:Paragraph({
+    Title = "<b>Support</b>",
+    Desc = "Join our Discord: discord.gg/cpshub\nSubscribe: youtube.com/@waspire",
+    TextSize = 13,
+    Box = true,
+})
+
 Tabs.Appearance:Divider()
 Tabs.Appearance:Paragraph({
     Title = "",
@@ -175,8 +210,56 @@ Tabs.Appearance:Paragraph({
     ThumbnailSize = 250,
 })
 
--- SNIPPET 1 COMPLETE: WindUI with CrimsonMidnight theme, all tabs initialized
--- SNIPPET 2: Settings, Toggles, Sliders + FIXED Camlock (CrimsonMidnight gradient, normal drag, target info)
+-- CONFIG SYSTEM - Saves every 5 seconds with error handling
+local ConfigData = {
+    detectActive = true,
+    m1AfterEnabled = false,
+    m1CatchEnabled = false,
+    normalRange = 30,
+    specialRange = 50,
+    skillRange = 50,
+    skillDelay = 1.2,
+    counterActive = true,
+    counterRange = 8,
+    ESPEnabled = true,
+    camlockEnabledPC = false,
+    camlockKey = "C",
+}
+
+local function saveConfig()
+    pcall(function()
+        if HttpService then
+            local jsonData = HttpService:JSONEncode(ConfigData)
+            writefile("CPS_Network_Config.json", jsonData)
+        end
+    end)
+end
+
+local function loadConfig()
+    pcall(function()
+        if HttpService and isfile("CPS_Network_Config.json") then
+            local fileData = readfile("CPS_Network_Config.json")
+            local decoded = HttpService:JSONDecode(fileData)
+            for key, value in pairs(decoded) do
+                if ConfigData[key] ~= nil then
+                    ConfigData[key] = value
+                end
+            end
+        end
+    end)
+end
+
+loadConfig()
+
+task.spawn(function()
+    while true do
+        task.wait(5)
+        saveConfig()
+    end
+end)
+
+-- SNIPPET 1 COMPLETE: WindUI with intro content, Auto Techs tab with Coming Soon, config system with auto-save
+-- SNIPPET 2: Settings, Toggles, Sliders + MODERN Camlock GUI (Click-based, Beautiful Design)
 local themes = {}
 for themeName, _ in pairs(WindUI:GetThemes()) do
     table.insert(themes, themeName)
@@ -191,6 +274,7 @@ local transparencySlider = Tabs.Appearance:Slider({
     Flag = "transparencySlider",
     Step = 0.1,
     Callback = function(value)
+        ConfigData.transparency = value
         Window:SetBackgroundTransparency(value)
         Window:SetBackgroundImageTransparency(value)
     end
@@ -225,21 +309,31 @@ Tabs.Appearance:Button({
 
 local m1AfterEnabled, m1CatchEnabled = false, false
 local normalRange, specialRange, skillRange, skillDelay = 30, 50, 50, 1.2
-local detectActive = true
+local detectActive = ConfigData.detectActive
 
-Tabs.AutoCombat:Toggle({ Title = "Auto Block", Value = true, Callback = function(v) detectActive = v end })
-Tabs.AutoCombat:Toggle({ Title = "M1 After Block", Value = false, Callback = function(v) m1AfterEnabled = v end })
-Tabs.AutoCombat:Toggle({ Title = "M1 Catch", Value = false, Callback = function(v) m1CatchEnabled = v end })
-Tabs.AutoCombat:Slider({ Title = "Normal Range", Value = {Min=10, Max=100, Default=30}, Step = 1, Callback = function(v) normalRange = tonumber(v) or 30 end })
-Tabs.AutoCombat:Slider({ Title = "Special Range", Value = {Min=10, Max=100, Default=50}, Step = 1, Callback = function(v) specialRange = tonumber(v) or 50 end })
-Tabs.AutoCombat:Slider({ Title = "Skill Range", Value = {Min=10, Max=100, Default=50}, Step = 1, Callback = function(v) skillRange = tonumber(v) or 50 end })
-Tabs.AutoCombat:Slider({ Title = "Skill Delay", Step = 0.1, Value = {Min=0.1, Max=5, Default=1.2}, Callback = function(v) skillDelay = tonumber(v) or 1.2 end })
+Tabs.AutoCombat:Toggle({ Title = "Auto Block", Value = ConfigData.detectActive, Callback = function(v) detectActive = v; ConfigData.detectActive = v end })
+Tabs.AutoCombat:Toggle({ Title = "M1 After Block", Value = ConfigData.m1AfterEnabled, Callback = function(v) m1AfterEnabled = v; ConfigData.m1AfterEnabled = v end })
+Tabs.AutoCombat:Toggle({ Title = "M1 Catch", Value = ConfigData.m1CatchEnabled, Callback = function(v) m1CatchEnabled = v; ConfigData.m1CatchEnabled = v end })
+Tabs.AutoCombat:Slider({ Title = "Normal Range", Value = {Min=10, Max=100, Default=ConfigData.normalRange}, Step = 1, Callback = function(v) normalRange = tonumber(v) or 30; ConfigData.normalRange = normalRange end })
+Tabs.AutoCombat:Slider({ Title = "Special Range", Value = {Min=10, Max=100, Default=ConfigData.specialRange}, Step = 1, Callback = function(v) specialRange = tonumber(v) or 50; ConfigData.specialRange = specialRange end })
+Tabs.AutoCombat:Slider({ Title = "Skill Range", Value = {Min=10, Max=100, Default=ConfigData.skillRange}, Step = 1, Callback = function(v) skillRange = tonumber(v) or 50; ConfigData.skillRange = skillRange end })
+Tabs.AutoCombat:Slider({ Title = "Skill Delay", Step = 0.1, Value = {Min=0.1, Max=5, Default=ConfigData.skillDelay}, Callback = function(v) skillDelay = tonumber(v) or 1.2; ConfigData.skillDelay = skillDelay end })
 
-local counterActive = true
-local counterRange = 8
+local counterActive = ConfigData.counterActive
+local counterRange = ConfigData.counterRange
 
-Tabs.AutoCounter:Toggle({ Title = "Auto Counter", Value = true, Callback = function(v) counterActive = v end })
-Tabs.AutoCounter:Slider({ Title = "Counter Range", Value = {Min=5, Max=25, Default=8}, Step = 1, Callback = function(v) counterRange = tonumber(v) or 8 end })
+Tabs.AutoCounter:Toggle({ Title = "Auto Counter", Value = ConfigData.counterActive, Callback = function(v) counterActive = v; ConfigData.counterActive = v end })
+Tabs.AutoCounter:Slider({ Title = "Counter Range", Value = {Min=5, Max=25, Default=ConfigData.counterRange}, Step = 1, Callback = function(v) counterRange = tonumber(v) or 8; ConfigData.counterRange = counterRange end })
+
+-- Auto Techs Tab - Coming Soon
+Tabs.AutoTechs:Divider()
+Tabs.AutoTechs:Paragraph({
+    Title = "<b><font size='18'>Coming Soon!</font></b>",
+    Desc = "The Auto Techs feature is currently in development. Check back later for updates!",
+    TextSize = 14,
+    Box = true,
+})
+Tabs.AutoTechs:Divider()
 
 function getPlayerInView()
     local closest, minangle = nil, math.huge
@@ -283,7 +377,7 @@ Tabs.AutoCombat:Keybind({
     Default = camlockKey.Name,
     Callback = function(name)
         local code = Enum.KeyCode[name]
-        if code then camlockKey = code end
+        if code then camlockKey = code; ConfigData.camlockKey = name end
     end,
 })
 
@@ -351,126 +445,118 @@ Players.PlayerRemoving:Connect(function(plr)
     if camlockTargetPC and plr == camlockTargetPC then clearCamlockPC() end
 end)
 
--- MOBILE CAMLOCK GUI - FIXED: CrimsonMidnight gradient, normal drag, target info, keybind, close button
+-- MODERN MOBILE CAMLOCK GUI - Beautiful design, click-based, CrimsonMidnight theme
 local camlockGui = Instance.new("ScreenGui", PlayerGui)
-camlockGui.Name = "CPSMobileCamlockGui"
+camlockGui.Name = "CPSModernCamlockGui"
 camlockGui.ResetOnSpawn = false
 camlockGui.Enabled = true
 
-local camlockFrame = Instance.new("Frame", camlockGui)
-camlockFrame.Size = UDim2.new(0, 140, 0, 70)
-camlockFrame.Position = UDim2.new(0.5, -70, 0.95, -80)
-camlockFrame.AnchorPoint = Vector2.new(0.5, 1)
-camlockFrame.BackgroundColor3 = Color3.fromHex("#05060A")
-camlockFrame.BorderSizePixel = 0
+local mainFrame = Instance.new("Frame", camlockGui)
+mainFrame.Size = UDim2.new(0, 160, 0, 90)
+mainFrame.Position = UDim2.new(0.5, -80, 0.95, -100)
+mainFrame.AnchorPoint = Vector2.new(0.5, 1)
+mainFrame.BackgroundColor3 = Color3.fromHex("#0A0B0E")
+mainFrame.BorderSizePixel = 0
 
-local frameStroke = Instance.new("UIStroke", camlockFrame)
-frameStroke.Color = Color3.fromHex("#6E0F12")
-frameStroke.Thickness = 2
+local cornerRadius = Instance.new("UICorner", mainFrame)
+cornerRadius.CornerRadius = UDim.new(0, 16)
 
-Instance.new("UICorner", camlockFrame).CornerRadius = UDim.new(0, 12)
+local strokeBorder = Instance.new("UIStroke", mainFrame)
+strokeBorder.Color = Color3.fromHex("#6E0F12")
+strokeBorder.Thickness = 2.5
+strokeBorder.LineJoinMode = Enum.LineJoinMode.Round
 
-local frameGradient = Instance.new("UIGradient", camlockFrame)
-frameGradient.Color = ColorSequence.new(Color3.fromHex("#6E0F12"), Color3.fromHex("#04152B"))
-frameGradient.Rotation = 90
+local gradientBg = Instance.new("UIGradient", mainFrame)
+gradientBg.Color = ColorSequence.new(Color3.fromHex("#6E0F12"), Color3.fromHex("#04152B"))
+gradientBg.Rotation = 90
 
-local closeButton = Instance.new("TextButton", camlockFrame)
-closeButton.Size = UDim2.new(0, 16, 0, 16)
-closeButton.Position = UDim2.new(1, -20, 0, 4)
-closeButton.BackgroundColor3 = Color3.fromHex("#6E0F12")
-closeButton.BorderSizePixel = 0
-closeButton.Text = "×"
-closeButton.TextColor3 = Color3.fromHex("#E6EEF8")
-closeButton.Font = Enum.Font.SourceSansBold
-closeButton.TextSize = 14
-closeButton.ZIndex = 2
+local shadowFrame = Instance.new("Frame", mainFrame)
+shadowFrame.Size = UDim2.new(1.1, 0, 1.1, 0)
+shadowFrame.Position = UDim2.new(-0.05, 0, -0.05, 0)
+shadowFrame.BackgroundColor3 = Color3.fromHex("#000000")
+shadowFrame.BorderSizePixel = 0
+shadowFrame.ZIndex = 0
 
-Instance.new("UICorner", closeButton).CornerRadius = UDim.new(0, 8)
+Instance.new("UICorner", shadowFrame).CornerRadius = UDim.new(0, 18)
+local shadowGradient = Instance.new("UIGradient", shadowFrame)
+shadowGradient.Transparency = NumberSequence.new(0, 0.8, 0.2)
 
-closeButton.MouseButton1Click:Connect(function()
+mainFrame.ZIndex = 1
+
+local titleLabel = Instance.new("TextLabel", mainFrame)
+titleLabel.Size = UDim2.new(1, -10, 0.3, 0)
+titleLabel.Position = UDim2.new(0, 5, 0, 5)
+titleLabel.BackgroundTransparency = 1
+titleLabel.Text = "CAMLOCK"
+titleLabel.TextColor3 = Color3.fromHex("#E6EEF8")
+titleLabel.Font = Enum.Font.GothamBold
+titleLabel.TextSize = 13
+titleLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+local statusLabel = Instance.new("TextLabel", mainFrame)
+statusLabel.Size = UDim2.new(0.6, 0, 0.25, 0)
+statusLabel.Position = UDim2.new(0, 5, 0, 28)
+statusLabel.BackgroundTransparency = 1
+statusLabel.Text = "OFF"
+statusLabel.TextColor3 = Color3.fromHex("#FF6B6B")
+statusLabel.Font = Enum.Font.GothamBold
+statusLabel.TextSize = 11
+
+local targetLabel = Instance.new("TextLabel", mainFrame)
+targetLabel.Size = UDim2.new(1, -10, 0.25, 0)
+targetLabel.Position = UDim2.new(0, 5, 0, 50)
+targetLabel.BackgroundTransparency = 1
+targetLabel.Text = "No Target"
+targetLabel.TextColor3 = Color3.fromHex("#C7D6F8")
+targetLabel.Font = Enum.Font.SourceSansMedium
+targetLabel.TextSize = 10
+targetLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+local closeBtn = Instance.new("TextButton", mainFrame)
+closeBtn.Size = UDim2.new(0, 20, 0, 20)
+closeBtn.Position = UDim2.new(1, -27, 0, 7)
+closeBtn.BackgroundColor3 = Color3.fromHex("#6E0F12")
+closeBtn.BorderSizePixel = 0
+closeBtn.Text = "✕"
+closeBtn.TextColor3 = Color3.new(1, 1, 1)
+closeBtn.Font = Enum.Font.GothamBold
+closeBtn.TextSize = 12
+
+Instance.new("UICorner", closeBtn).CornerRadius = UDim.new(0, 10)
+
+closeBtn.MouseButton1Click:Connect(function()
     camlockGui:Destroy()
 end)
 
-local statusText = Instance.new("TextLabel", camlockFrame)
-statusText.Size = UDim2.new(1, -8, 0.28, 0)
-statusText.Position = UDim2.new(0, 4, 0, 2)
-statusText.BackgroundTransparency = 1
-statusText.Text = "Camlock: OFF"
-statusText.TextColor3 = Color3.fromHex("#E6EEF8")
-statusText.Font = Enum.Font.SourceSansBold
-statusText.TextScaled = true
-statusText.TextXAlignment = Enum.TextXAlignment.Left
-
-local targetText = Instance.new("TextLabel", camlockFrame)
-targetText.Size = UDim2.new(1, -8, 0.32, 0)
-targetText.Position = UDim2.new(0, 4, 0, 20)
-targetText.BackgroundTransparency = 1
-targetText.Text = "Target: None"
-targetText.TextColor3 = Color3.fromHex("#C7D6F8")
-targetText.Font = Enum.Font.SourceSansItalic
-targetText.TextScaled = true
-targetText.TextXAlignment = Enum.TextXAlignment.Left
-
-local keybindText = Instance.new("TextLabel", camlockFrame)
-keybindText.Size = UDim2.new(1, -8, 0.25, 0)
-keybindText.Position = UDim2.new(0, 4, 0.42, 0)
-keybindText.BackgroundTransparency = 1
-keybindText.Text = "PC: " .. camlockKey.Name
-keybindText.TextColor3 = Color3.fromHex("#9FBDF8")
-keybindText.Font = Enum.Font.SourceSansItalic
-keybindText.TextSize = 10
-keybindText.TextXAlignment = Enum.TextXAlignment.Left
-
-camlockFrame.Active = true
+mainFrame.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        camlockMobileState = not camlockMobileState
+        if camlockMobileState then
+            lockCamlockMobile()
+        else
+            clearCamlockMobile()
+        end
+    end
+end)
 
 local camlockMobileState = false
 local camlockTargetMobile, camlockHighlightMobile, camlockBillboardMobile = nil, nil, nil
-local dragging, dragStart, startPos = false, nil, nil
-
-camlockFrame.InputBegan:Connect(function(input)
-    if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then
-        dragging = true
-        dragStart = input.Position
-        startPos = camlockFrame.Position
-    end
-end)
-
-UserInputService.InputChanged:Connect(function(input)
-    if dragging and dragStart then
-        local delta = input.Position - dragStart
-        camlockFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
-    end
-end)
-
-UserInputService.InputEnded:Connect(function(input, gp)
-    if not gp and (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then
-        if dragging and dragStart and (input.Position - dragStart).Magnitude < 5 then
-            camlockMobileState = not camlockMobileState
-            if camlockMobileState then
-                lockCamlockMobile()
-            else
-                clearCamlockMobile()
-            end
-        end
-        dragging = false
-        dragStart = nil
-        startPos = nil
-    end
-end)
 
 function lockCamlockMobile()
     clearCamlockMobile()
     if not camlockMobileState then
-        statusText.Text = "Camlock: OFF"
-        targetText.Text = "Target: None"
+        statusLabel.Text = "OFF"
+        statusLabel.TextColor3 = Color3.fromHex("#FF6B6B")
+        targetLabel.Text = "No Target"
         RunService:UnbindFromRenderStep("Mobile_CamlockLook")
         return
     end
 
     local target = getPlayerInView()
     if not target or not target.Character or not target.Character:FindFirstChild("HumanoidRootPart") or not target.Character:FindFirstChildOfClass("Humanoid") or target.Character:FindFirstChildOfClass("Humanoid").Health <= 0 then
-        statusText.Text = "Camlock: ON"
-        targetText.Text = "Target: None"
+        statusLabel.Text = "ON"
+        statusLabel.TextColor3 = Color3.fromHex("#FFD93D")
+        targetLabel.Text = "No Target"
         RunService:UnbindFromRenderStep("Mobile_CamlockLook")
         return
     end
@@ -479,8 +565,9 @@ function lockCamlockMobile()
     local hum = camlockTargetMobile:FindFirstChildOfClass("Humanoid")
     local hrp = camlockTargetMobile:FindFirstChild("HumanoidRootPart")
     if not (hum and hrp and hum.Health > 0) then
-        statusText.Text = "Camlock: ON"
-        targetText.Text = "Target: None"
+        statusLabel.Text = "ON"
+        statusLabel.TextColor3 = Color3.fromHex("#FFD93D")
+        targetLabel.Text = "No Target"
         RunService:UnbindFromRenderStep("Mobile_CamlockLook")
         return
     end
@@ -505,9 +592,9 @@ function lockCamlockMobile()
     txt.TextScaled = true
     txt.BackgroundTransparency = 1
 
-    statusText.Text = "Camlock: ON"
-    targetText.Text = "Target: " .. (target.DisplayName or target.Name)
-    keybindText.Text = "PC: " .. camlockKey.Name
+    statusLabel.Text = "ON"
+    statusLabel.TextColor3 = Color3.fromHex("#6BCB77")
+    targetLabel.Text = target.DisplayName or target.Name
 
     RunService:UnbindFromRenderStep("Mobile_CamlockLook")
     RunService:BindToRenderStep("Mobile_CamlockLook", Enum.RenderPriority.Camera.Value + 5, function()
@@ -527,8 +614,9 @@ function clearCamlockMobile()
     if camlockHighlightMobile then pcall(function() camlockHighlightMobile:Destroy() end) camlockHighlightMobile = nil end
     camlockTargetMobile = nil
     camlockMobileState = false
-    statusText.Text = "Camlock: OFF"
-    targetText.Text = "Target: None"
+    statusLabel.Text = "OFF"
+    statusLabel.TextColor3 = Color3.fromHex("#FF6B6B")
+    targetLabel.Text = "No Target"
 end
 
 Players.PlayerRemoving:Connect(function(plr)
@@ -536,8 +624,8 @@ Players.PlayerRemoving:Connect(function(plr)
     if camlockTargetMobile and plr.Character == camlockTargetMobile then clearCamlockMobile() end
 end)
 
--- SNIPPET 2 COMPLETE: Fixed camlock GUI with CrimsonMidnight gradient, normal dragging, target info, keybind display
--- SNIPPET 3: Autoblock and M1 Catch Combat Logic
+-- SNIPPET 2 COMPLETE: Modern camlock GUI with click-based toggle, auto-tech coming soon tab, config integration
+-- SNIPPET 3: Autoblock and M1 Catch Combat Logic with Config Integration
 local comboIDs = {10480793962, 10480796021}
 
 local allIDs = {
@@ -709,8 +797,8 @@ RunService.Heartbeat:Connect(function()
     pcall(checkM1Catch)
 end)
 
--- SNIPPET 3 COMPLETE: Autoblock and M1 Catch with proper animation detection
--- SNIPPET 4: FIXED Auto Counter + FIXED ESP + Utilities Tab
+-- SNIPPET 3 COMPLETE: Autoblock and M1 Catch fully integrated with config system
+-- SNIPPET 4: FIXED Auto Counter + FIXED ESP + Utilities with Config Integration
 local delayed = {
     ["rbxassetid://10479335397"] = true,
     ["rbxassetid://13380255751"] = true,
@@ -777,8 +865,7 @@ RunService.Heartbeat:Connect(function()
     end)
 end)
 
--- FIXED ESP SYSTEM - Now properly checks for valid players and uses correct parent checks
-local ESPEnabled = true
+local ESPEnabled = ConfigData.ESPEnabled
 local ESPFolder = Instance.new("Folder", workspace)
 ESPFolder.Name = "CPS_ESP"
 local espCache = {}
@@ -856,9 +943,10 @@ end)
 
 Tabs.Utilities:Toggle{
     Title = "Enable ESP",
-    Value = true,
+    Value = ConfigData.ESPEnabled,
     Callback = function(value)
         ESPEnabled = value
+        ConfigData.ESPEnabled = value
         if not value then
             for plr, _ in pairs(espCache) do
                 clearESP(plr)
@@ -962,7 +1050,8 @@ game:GetService("Players").PlayerRemoving:Connect(function(plr)
 end)
 
 print("✅ CPS Network Script Loaded Successfully!")
-print("Discord: https://discord.gg/cpshub")
-print("Youtube: https://youtube.com/@waspire")
+print("📁 Config saved to: CPS_Network_Config.json (saves every 5 seconds)")
+print("💬 Discord: https://discord.gg/cpshub")
+print("📺 Youtube: https://youtube.com/@waspire")
 
--- SNIPPET 4 COMPLETE: Auto Counter working, ESP FIXED with proper player validation, all utilities functional
+-- SNIPPET 4 COMPLETE: Full Auto Counter, ESP, Utilities with config auto-save system
