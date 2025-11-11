@@ -1,6 +1,6 @@
 -- ═══════════════════════════════════════════════════════════════
 -- CPS Network | Strongest Battlegrounds Script (WindUI, Full Features)
--- Split 1/5 : UI Foundation, Theme, Main Window, Tabs, Introduction
+-- Split 1/5 : UI Foundation, CrimsonMidnight Theme, Main Window, Tabs
 -- ═══════════════════════════════════════════════════════════════
 
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
@@ -52,29 +52,73 @@ local Localization = WindUI:Localization({
     }
 })
 
+-- NEW CRIMSONMIDNIGHT_GRADIENT THEME
 WindUI:AddTheme({
-    Name = "MonoOrange",
+    Name = "CrimsonMidnight_Gradient",
     Accent = WindUI:Gradient({
-        ["0"]   = { Color = Color3.fromHex("#FFB347"), Transparency = 0 },
-        ["100"] = { Color = Color3.fromHex("#D94A00"), Transparency = 0 },
-    }, {Rotation = 90}),
-    Dialog = Color3.fromHex("#2A0A00"),
-    Outline = Color3.fromHex("#5B2606"),
-    Text = Color3.fromHex("#fa7435"),
-    Placeholder = Color3.fromHex("#7A3A12"),
-    Background = Color3.fromHex("#0D0400"),
-    Button = Color3.fromHex("#7A3A12"),
-    Icon = Color3.fromHex("#7A3A12"),
-    Hover = Color3.fromHex("#FFB24D"),
-    Active = Color3.fromHex("#D95A00"),
-    ScrollBar = Color3.fromHex("#3A1806"),
-    Border = Color3.fromHex("#6C3208"),
-    Glow = Color3.fromHex("#FFAE4F"),
-    Shadow = Color3.fromHex("#210800"),
+        ["0"]   = { Color = Color3.fromHex("#6E0F12"), Transparency = 0 },
+        ["50"]  = { Color = Color3.fromHex("#4A0C2E"), Transparency = 0 },
+        ["100"] = { Color = Color3.fromHex("#04152B"), Transparency = 0 },
+    }, { Rotation = 90 }),
+    Dialog = WindUI:Gradient({
+        ["0"]   = { Color = Color3.fromHex("#05060A"), Transparency = 0 },
+        ["100"] = { Color = Color3.fromHex("#0E0A0C"), Transparency = 0 },
+    }, { Rotation = 0 }),
+    Outline = WindUI:Gradient({
+        ["0"]   = { Color = Color3.fromHex("#2B0F12"), Transparency = 0 },
+        ["100"] = { Color = Color3.fromHex("#231014"), Transparency = 0 },
+    }, { Rotation = 90 }),
+    Text = WindUI:Gradient({
+        ["0"]   = { Color = Color3.fromHex("#E6EEF8"), Transparency = 0 },
+        ["100"] = { Color = Color3.fromHex("#C7D6F8"), Transparency = 0 },
+    }, { Rotation = 0 }),
+    Placeholder = WindUI:Gradient({
+        ["0"]   = { Color = Color3.fromHex("#5A1B20"), Transparency = 0 },
+        ["100"] = { Color = Color3.fromHex("#8C1620"), Transparency = 0 },
+    }, { Rotation = 90 }),
+    Background = WindUI:Gradient({
+        ["0"]   = { Color = Color3.fromHex("#04152B"), Transparency = 0 },
+        ["50"]  = { Color = Color3.fromHex("#05060A"), Transparency = 0 },
+        ["100"] = { Color = Color3.fromHex("#000409"), Transparency = 0 },
+    }, { Rotation = 45 }),
+    Button = WindUI:Gradient({
+        ["0"]   = { Color = Color3.fromHex("#2D0C12"), Transparency = 0 },
+        ["100"] = { Color = Color3.fromHex("#6E0F12"), Transparency = 0 },
+    }, { Rotation = 90 }),
+    Icon = WindUI:Gradient({
+        ["0"]   = { Color = Color3.fromHex("#9FBDF8"), Transparency = 0 },
+        ["100"] = { Color = Color3.fromHex("#C7D6F8"), Transparency = 0 },
+    }, { Rotation = 0 }),
+    Hover = WindUI:Gradient({
+        ["0"]   = { Color = Color3.fromHex("#8C1620"), Transparency = 0 },
+        ["100"] = { Color = Color3.fromHex("#B33A3F"), Transparency = 0 },
+    }, { Rotation = 90 }),
+    Active = WindUI:Gradient({
+        ["0"]   = { Color = Color3.fromHex("#4A0A0D"), Transparency = 0 },
+        ["100"] = { Color = Color3.fromHex("#0A0B0E"), Transparency = 0 },
+    }, { Rotation = 90 }),
+    ScrollBar = WindUI:Gradient({
+        ["0"]   = { Color = Color3.fromHex("#0A1220"), Transparency = 0 },
+        ["100"] = { Color = Color3.fromHex("#04121B"), Transparency = 0 },
+    }, { Rotation = 0 }),
+    Border = WindUI:Gradient({
+        ["0"]   = { Color = Color3.fromHex("#231014"), Transparency = 0 },
+        ["100"] = { Color = Color3.fromHex("#2B1A22"), Transparency = 0 },
+    }, { Rotation = 90 }),
+    Glow = WindUI:Gradient({
+        ["0"]   = { Color = Color3.fromHex("#A33A48"), Transparency = 0 },
+        ["50"]  = { Color = Color3.fromHex("#7A3A63"), Transparency = 0 },
+        ["100"] = { Color = Color3.fromHex("#5A1B4F"), Transparency = 0 },
+    }, { Rotation = 45 }),
+    Shadow = WindUI:Gradient({
+        ["0"]   = { Color = Color3.fromHex("#000000"), Transparency = 0 },
+        ["100"] = { Color = Color3.fromHex("#030412"), Transparency = 0 },
+    }, { Rotation = 0 }),
 })
 
-WindUI:SetFont("rbxassetid://12187375716")
-WindUI:SetTheme("MonoOrange")
+-- NEW FONT: NUNITO
+WindUI:SetFont("rbxasset://fonts/families/Nunito.json")
+WindUI:SetTheme("CrimsonMidnight_Gradient")
 
 local function gradient(text, startColor, endColor)
     local result = ""
@@ -89,10 +133,10 @@ local function gradient(text, startColor, endColor)
 end
 
 WindUI:Popup({
-    Title = gradient("Welcome To CPS Network!", Color3.fromHex("#ec4d03"), Color3.fromHex("#490303")),
-    Icon = "rbxassetid://115220176602432",
+    Title = gradient("Welcome To CPS Network!", Color3.fromHex("#530303"), Color3.fromHex("#04027c")),
+    Icon = "rbxassetid://93732476839185",
     Content = "Please join the discord server!",
-    Theme = "MonoOrange",
+    Theme = "CrimsonMidnight_Gradient",
     Buttons = {
         {
             Title = "Enjoy!",
@@ -105,16 +149,16 @@ WindUI:Popup({
 
 local Window = WindUI:CreateWindow({
     Title = "Strongest Battlegrounds",
-    Icon = "rbxassetid://115220176602432",
+    Icon = "rbxassetid://93732476839185",
     Author = "CPS Network",
     Folder = "CPS_Network_Config",
     Size = UDim2.fromOffset(590, 500),
-    Theme = "MonoOrange",
+    Theme = "CrimsonMidnight_Gradient",
     Transparent = true,
     BackgroundImageTransparency = 0.25,
     HidePanelBackground = false,
     NewElements = false,
-    Background = "rbxassetid://126127539858360",
+    Background = "rbxassetid://120655420966329",
     User = {
         Enabled = true,
         Anonymous = false,
@@ -210,7 +254,7 @@ Tabs.Introduction:Paragraph({
     Desc = "",
     Image = "",
     ImageSize = 30,
-    Thumbnail = "rbxassetid://136887189396137",
+    Thumbnail = "rbxassetid://117010285415784",
     ThumbnailSize = 250,
 })
 
@@ -226,10 +270,10 @@ Tabs.Introduction:Paragraph({
 
 Tabs.Introduction:Divider()
 
--- Continue to Snippet 2 for settings + auto combat/auto counter tab and all logic!
+-- Continue to Snippet 2!
 -- END OF SNIPPET 1/5
 -- ═══════════════════════════════════════════════════════════════
--- SNIPPET 2/5 : Settings, Toggles, Sliders, Combat/Counter/Camlock setup
+-- SNIPPET 2/5 : Settings, Toggles, Sliders, Combat/Counter/Techs
 -- ═══════════════════════════════════════════════════════════════
 
 local themes = {}
@@ -265,12 +309,12 @@ local ThemeToggle = Tabs.Introduction:Toggle({
     Desc = "Use dark color scheme",
     Value = true,
     Callback = function(state)
-        if canchangetheme then WindUI:SetTheme(state and "MonoOrange" or "MonoOrange") end
+        if canchangetheme then WindUI:SetTheme(state and "CrimsonMidnight_Gradient" or "CrimsonMidnight_Gradient") end
     end
 })
 WindUI:OnThemeChange(function(theme)
     canchangetheme = false
-    ThemeToggle:Set(theme == "MonoOrange")
+    ThemeToggle:Set(theme == "CrimsonMidnight_Gradient")
     canchangetheme = true
 end)
 
@@ -558,7 +602,7 @@ end)
 -- Continue to Snippet 3 for MOBILE CAMLOCK GUI!
 -- END OF SNIPPET 2/5
 -- ═══════════════════════════════════════════════════════════════
--- SNIPPET 3/5 : MOBILE CAMLOCK GUI
+-- SNIPPET 3/5 : MOBILE CAMLOCK GUI (RED-BLUE GRADIENT, WHITE TEXT)
 -- ═══════════════════════════════════════════════════════════════
 
 -- MOBILE CAMLOCK GUI
@@ -575,8 +619,10 @@ camlockFrame.BackgroundColor3 = Color3.fromRGB(35, 35, 40)
 camlockFrame.BorderSizePixel = 0
 Instance.new("UIStroke", camlockFrame).Color = Color3.new(1, 0, 0)
 Instance.new("UICorner", camlockFrame).CornerRadius = UDim.new(0, 14)
+
+-- RED-BLUE GRADIENT
 local UIGradient = Instance.new("UIGradient", camlockFrame)
-UIGradient.Color = ColorSequence.new(Color3.new(1, 0, 0), Color3.new(0.5, 0, 0))
+UIGradient.Color = ColorSequence.new(Color3.new(1, 0, 0), Color3.new(0, 0, 1))
 UIGradient.Rotation = 45
 
 local camlockText = Instance.new("TextLabel", camlockFrame)
@@ -584,7 +630,7 @@ camlockText.Size = UDim2.new(1, -10, 0.4, -10)
 camlockText.Position = UDim2.new(0, 5, 0, 4)
 camlockText.BackgroundTransparency = 1
 camlockText.Text = "Camlock: OFF"
-camlockText.TextColor3 = Color3.new(1, 0, 0)
+camlockText.TextColor3 = Color3.new(1, 1, 1)
 camlockText.Font = Enum.Font.SourceSansBold
 camlockText.TextScaled = true
 
@@ -593,7 +639,7 @@ fightingText.Size = UDim2.new(1, -10, 0.4, -10)
 fightingText.Position = UDim2.new(0, 5, 0, 30)
 fightingText.BackgroundTransparency = 1
 fightingText.Text = ""
-fightingText.TextColor3 = Color3.new(1, 0, 0)
+fightingText.TextColor3 = Color3.new(1, 1, 1)
 fightingText.Font = Enum.Font.SourceSansItalic
 fightingText.TextScaled = true
 
@@ -602,7 +648,7 @@ keybindText.Size = UDim2.new(1, -10, 0.2, -5)
 keybindText.Position = UDim2.new(0, 5, 0, 56)
 keybindText.BackgroundTransparency = 1
 keybindText.Text = "PC Keybind: " .. camlockKey.Name
-keybindText.TextColor3 = Color3.new(1, 0, 0)
+keybindText.TextColor3 = Color3.new(1, 1, 1)
 keybindText.Font = Enum.Font.SourceSansItalic
 keybindText.TextScaled = true
 
@@ -1139,7 +1185,7 @@ Tabs.Utilities:Slider{
 Tabs.Utilities:Divider()
 Tabs.Utilities:Paragraph({
     Title = "<font size=\"14\"><b>💡 Information</b></font>",
-    Desc = "Script Version: 2.0\nLast Updated: November 2025\nMade with ❤️ by CPS Network",
+    Desc = "Script Version: 2.1\nTheme: CrimsonMidnight Gradient\nLast Updated: November 2025\nMade with ❤️ by CPS Network",
     TextSize = 12,
     Box = true,
 })
@@ -1172,6 +1218,8 @@ game:GetService("Players").PlayerRemoving:Connect(function(plr)
 end)
 
 print("✅ CPS Network Script Loaded Successfully!")
+print("💀 Theme: CrimsonMidnight_Gradient with Nunito Font")
+print("🎨 Camlock GUI: Red-Blue Gradient with WHITE Text")
 print("Discord: https://discord.gg/cpshub")
 print("Youtube: https://youtube.com/@waspire")
 
